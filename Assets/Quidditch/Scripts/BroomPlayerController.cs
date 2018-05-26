@@ -20,12 +20,13 @@ public class BroomPlayerController : MonoBehaviour {
 	private Text help; 
 	private Text snitchCount; 
 	private GameObject finish;
-	private TimerLogic timerlog= new TimerLogic();
+	private TimerLogic timerlog;
 	private float dist = 0f;
 	float smalltime = 10f;
 
 	// Use this for initialization
 	void Start () {
+		timerlog = new TimerLogic();
 		if (GetComponent<Rigidbody> ()) {
 			rBody = GetComponent <Rigidbody> ();
 		} else {
