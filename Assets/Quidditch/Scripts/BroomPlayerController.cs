@@ -90,7 +90,7 @@ public class BroomPlayerController : MonoBehaviour {
 	
 
 		if (snitchCatched && GameObject.FindGameObjectWithTag ("Ring") == null) {
-			help.text = "Congrats! You have passed all rings and catched the snitch";
+			help.text = "Congrats! You have collected all rings and catched the snitch.";
 			Time.timeScale = 0;
 			rBody.velocity = Vector3.zero;
 			timerlog.EndGame ();

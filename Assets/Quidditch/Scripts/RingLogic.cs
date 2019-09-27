@@ -9,7 +9,7 @@ public class RingLogic : MonoBehaviour {
 	GameObject snitch;
 	SnitchLogic snitchController;
 	BroomPlayerController broomcontroller;
-    private byte counter = 1;
+    private byte counter = 0;
     Vector3[] positions = new Vector3[11];
     Vector3[] rotations = new Vector3[11];
 	Text UICount;
@@ -70,28 +70,25 @@ public class RingLogic : MonoBehaviour {
     }
 
 	void OnTriggerExit (Collider other) {
-		if (other.gameObject == GameObject.FindGameObjectWithTag ("Player") && counter < 11) {
+        if (other.gameObject == GameObject.FindGameObjectWithTag ("Player") && counter <= 9) {
 			Debug.Log ("Counter : " + counter);
 			//ting = GetComponent<AudioSource> ();
 			//ting.Play();
+			counter++;
 			ring.transform.position = positions[counter]/2;
 			ring.transform.eulerAngles = rotations [counter];
-			timerlogic.setRingCount(counter - 1);
-			counter++;
-		} else if (other.gameObject == GameObject.FindGameObjectWithTag ("Player") && counter == 11) {
-			counter++;
+			timerlogic.setRingCount(counter);
 		}
 
-		if (counter == 11) {
-			snitchController.Init ();
-			broomcontroller.AllowSnitchCatch ();
-		} 
-		else if (counter == 12) {
+		ringcount = counter;
+		UICount.text = ringcount.ToString();
+
+        if (counter == 10)
+        {
+            snitchController.Init();
+            broomcontroller.AllowSnitchCatch();
             Destroy(this);
             Destroy(ring);
         }
-
-		ringcount = counter - 1;
-		UICount.text = ringcount.ToString();
     }
 }
